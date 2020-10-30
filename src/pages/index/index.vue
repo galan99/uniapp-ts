@@ -1,50 +1,49 @@
 <template>
-	<view class="content">
-        <image class="logo" src="../../static/logo.png"></image>
-		<view>
-            <text class="title">{{title}}</text>
-        </view>
-	</view>
+  <view class="content">
+    <text class="title"> {{ title }}</text>
+    <item :list="list"/>
+    <view class="name" @click="handleClik">list页面</view>
+  </view>
 </template>
 
 <script lang="ts">
-    import Vue from 'vue';
-	export default Vue.extend({
-		data() {
-			return {
-				title: 'Hello'
-			}
-		},
-		onLoad() {
+import { Vue, Component } from 'vue-property-decorator'
+import item from './item.vue'
 
-		},
-		methods: {
+@Component({
+  components: {
+    item
+  }
+})
+export default class Home extends Vue {
+  title = 'Hello app'
 
-		}
-	});
+  list = [
+    { name: 'one text', id: 1 },
+    { name: 'two text', id: 2 },
+    { name: 'three text', id: 3 },
+    { name: 'four text', id: 4 }
+  ]
+
+  onLoad() {
+    console.log('The page is on load success')
+  }
+  handleClik() {
+    uni.navigateTo({
+      url: '/pages/list/index'
+    })
+  }
+}
 </script>
 
-<style>
-	.content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin: 200rpx auto 50rpx auto;
-	}
-
-	.text-area {
-		display: flex;
-		justify-content: center;
-	}
-
-	.title {
-		font-size: 36rpx;
-		color: #8f8f94;
-	}
+<style scoped lang="scss">
+.content {
+  text-align: center;
+  .title {
+    display: block;
+    margin-bottom: 30rpx;
+    font-size: 40rpx;
+    font-weight: bold;
+  }
+}
 </style>
