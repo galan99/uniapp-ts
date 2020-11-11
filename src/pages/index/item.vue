@@ -1,5 +1,6 @@
 <template>
   <view>
+    <view class="name">{{name}}</view>
     <view class="item" v-for="item in list" :key="item.id">
       {{item.name}}
     </view>
@@ -7,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator'
 
 @Component({
   props: {
@@ -15,7 +16,9 @@ import { Vue, Component } from 'vue-property-decorator'
   }
 })
 export default class Home extends Vue {
-  title = 'Hello22'
+  // @Prop({ default: '' }) public readonly name!: string
+  @Prop(String)
+  name!: string
 
   created() {
     console.log('components：item')
